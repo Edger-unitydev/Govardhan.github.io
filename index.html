@@ -8,95 +8,98 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #0f172a; color: white; text-align: center; padding: 40px; }
-        h1 { font-size: 3rem; }
-        p { font-size: 1.2rem; }
-
-        /* Slideshow */
-        .slideshow-container { max-width: 600px; margin: auto; position: relative; border-radius: 10px; overflow: hidden; }
+        h1 { font-size: 3rem; transition: 0.3s; }
+        h1:hover { color: #007BFF; }
+        .slideshow-container { position: relative; max-width: 600px; margin: auto; }
         .slide { display: none; }
-        .slide img { width: 100%; border-radius: 10px; }
-        
-        /* Games Pyramid */
-        .games-container { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 350px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); margin: 10px; transition: 0.3s; }
-        .game:hover { transform: scale(1.05); }
-        .game img { width: 100%; border-radius: 10px; }
-        .game h3 { margin: 10px 0; }
-        .game a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
-        .game a:hover { background: #0056b3; }
-        
-        /* Pop-up */
-        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
-        .modal-content { background: #1e293b; color: white; padding: 20px; border-radius: 10px; text-align: center; width: 300px; margin: 15% auto; }
-        .close { color: white; float: right; font-size: 28px; cursor: pointer; }
+        img { width: 100%; border-radius: 10px; }
+        .game-jam { margin-top: 20px; }
+        .games-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 300px; text-align: center; }
+        .game:hover { transform: scale(1.05); cursor: pointer; }
+        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: black; padding: 20px; border-radius: 10px; z-index: 10; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
     </style>
 </head>
 <body>
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
     
-    <!-- Slideshow -->
+    <!-- Auto-sliding certificates -->
     <div class="slideshow-container">
-        <div class="slide fade"><img src="GLOBAL%20GAME%20JAM.pdf" alt="Certificate"></div>
-        <div class="slide fade"><img src="gamejam.jpg" alt="Game Jam Win"></div>
-        <div class="slide fade"><img src="achievement1.jpg" alt="Achievement"></div>
+        <img class="slide" src="https://raw.githubusercontent.com/Edger-unitydev/Govardhan.github.io/main/GOVARDHAN%20R%20-1.jpg" alt="Certificate 1">
+        <img class="slide" src="https://your-other-certificate-link.jpg" alt="Certificate 2">
     </div>
     
-    <!-- Games Pyramid -->
+    <!-- Game Jam Winning Game -->
+    <div class="game-jam">
+        <h2>🏆 Global Game Jam Winner</h2>
+        <div class="game" onclick="showPopup('gameJam')">
+            <img src="https://your-game-thumbnail-link.jpg" alt="Winning Game">
+            <h3>Winning Game</h3>
+        </div>
+    </div>
+    
+    <!-- Other Games -->
     <div class="games-container">
-        <div class="game" style="width: 400px;">
-            <img src="gamejam_game.jpg" alt="Game Jam Winner">
-            <h3>GLOBAL GAME JAM WINNER</h3>
-            <p>A game that won first place in GGJ!</p>
-            <a href="javascript:void(0)" onclick="openGameModal('Global Game Jam Winner', 'A top-tier game!', 'https://yourgame.itch.io/gamejam')">Play Now</a>
-        </div>
-        <div class="game">
-            <img src="tank_battle.jpg" alt="Tank Battle">
+        <div class="game" onclick="showPopup('tankBattle')">
+            <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
             <h3>TANK BATTLE</h3>
-            <p>An arcade-style tank combat game.</p>
-            <a href="javascript:void(0)" onclick="openGameModal('Tank Battle', 'An arcade tank shooter!', 'https://yourgame.itch.io/game1')">Play Now</a>
         </div>
-        <div class="game">
-            <img src="knife_throwing.jpg" alt="Knife Throwing">
+        <div class="game" onclick="showPopup('knifeThrowing')">
+            <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
             <h3>KNIFE THROWING</h3>
-            <p>A fast-paced knife game.</p>
-            <a href="javascript:void(0)" onclick="openGameModal('Knife Throwing', 'A fun knife-throwing challenge!', 'https://yourgame.itch.io/game2')">Play Now</a>
         </div>
     </div>
     
-    <!-- Pop-up Modal -->
-    <div id="gameModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeGameModal()">&times;</span>
-            <h2 id="gameTitle"></h2>
-            <p id="gameDescription"></p>
-            <a id="gameLink" href="#" target="_blank" class="play-button">Play Now</a>
-        </div>
+    <!-- Popup Details -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <h2 id="popup-title"></h2>
+        <p id="popup-description"></p>
+        <a id="popup-link" href="#" target="_blank">Play Now</a>
     </div>
     
     <script>
+        // Auto-sliding images
         let slideIndex = 0;
         function showSlides() {
             let slides = document.getElementsByClassName("slide");
             for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
+                slides[i].style.display = "none";
             }
             slideIndex++;
             if (slideIndex > slides.length) { slideIndex = 1; }
-            slides[slideIndex - 1].style.display = "block";  
+            slides[slideIndex - 1].style.display = "block";
             setTimeout(showSlides, 3000);
         }
         showSlides();
         
-        function openGameModal(title, description, link) {
-            document.getElementById("gameTitle").innerText = title;
-            document.getElementById("gameDescription").innerText = description;
-            document.getElementById("gameLink").href = link;
-            document.getElementById("gameModal").style.display = "block";
+        // Popup for games
+        function showPopup(game) {
+            let title, description, link;
+            if (game === 'gameJam') {
+                title = "Global Game Jam Winner";
+                description = "My award-winning game at the Global Game Jam!";
+                link = "https://yourgame.itch.io/gamejam";
+            } else if (game === 'tankBattle') {
+                title = "Tank Battle";
+                description = "An arcade-style tank combat game with AI enemies and explosive action!";
+                link = "https://yourgame.itch.io/tankbattle";
+            } else if (game === 'knifeThrowing') {
+                title = "Knife Throwing";
+                description = "A fast-paced knife-throwing game where precision and timing are key!";
+                link = "https://yourgame.itch.io/knifethrowing";
+            }
+            document.getElementById("popup-title").textContent = title;
+            document.getElementById("popup-description").textContent = description;
+            document.getElementById("popup-link").href = link;
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
         }
-        
-        function closeGameModal() {
-            document.getElementById("gameModal").style.display = "none";
+        function closePopup() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
         }
     </script>
 </body>
