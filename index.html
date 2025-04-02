@@ -8,96 +8,95 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #0f172a; color: white; text-align: center; padding: 40px; }
-        h1 { font-size: 3rem; transition: 0.3s; }
-        h1:hover { color: #007BFF; }
+        h1 { font-size: 3rem; }
         p { font-size: 1.2rem; }
+
+        /* Slideshow */
+        .slideshow-container { max-width: 600px; margin: auto; position: relative; border-radius: 10px; overflow: hidden; }
+        .slide { display: none; }
+        .slide img { width: 100%; border-radius: 10px; }
         
-        /* Slideshow Styles */
-        .slideshow-container { max-width: 800px; position: relative; margin: auto; }
-        .slides { display: none; width: 100%; border-radius: 10px; }
-        
-        /* Pyramid Layout */
+        /* Games Pyramid */
         .games-container { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 300px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); transition: 0.3s; margin-bottom: 15px; }
-        .game:hover { transform: scale(1.05); cursor: pointer; }
+        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 350px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); margin: 10px; transition: 0.3s; }
+        .game:hover { transform: scale(1.05); }
         .game img { width: 100%; border-radius: 10px; }
         .game h3 { margin: 10px 0; }
-        .game p { font-size: 1rem; }
+        .game a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
+        .game a:hover { background: #0056b3; }
         
-        /* Popup Styles */
-        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1e293b; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(255,255,255,0.2); width: 350px; text-align: center; z-index: 10; }
-        .popup a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
-        .popup a:hover { background: #0056b3; }
-        .popup-close { background: red; color: white; border: none; padding: 5px 10px; margin-top: 10px; cursor: pointer; }
-        
+        /* Pop-up */
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
+        .modal-content { background: #1e293b; color: white; padding: 20px; border-radius: 10px; text-align: center; width: 300px; margin: 15% auto; }
+        .close { color: white; float: right; font-size: 28px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
     
-    <!-- Slideshow for Certificates -->
+    <!-- Slideshow -->
     <div class="slideshow-container">
-        <img class="slides" src="certificate1.jpg" alt="Certificate 1">
-        <img class="slides" src="certificate2.jpg" alt="Certificate 2">
-        <img class="slides" src="certificate3.jpg" alt="Certificate 3">
+        <div class="slide fade"><img src="GLOBAL%20GAME%20JAM.pdf" alt="Certificate"></div>
+        <div class="slide fade"><img src="gamejam.jpg" alt="Game Jam Win"></div>
+        <div class="slide fade"><img src="achievement1.jpg" alt="Achievement"></div>
     </div>
     
-    <!-- Featured Game -->
+    <!-- Games Pyramid -->
     <div class="games-container">
-        <div class="game" onclick="showPopup('GameJamWinner', 'An award-winning game developed during the Global Game Jam.')">
-            <img src="gamejam.jpg" alt="Game Jam Winner">
-            <h3>GAME JAM WINNER</h3>
-            <p>A top-tier game developed during the Global Game Jam.</p>
+        <div class="game" style="width: 400px;">
+            <img src="gamejam_game.jpg" alt="Game Jam Winner">
+            <h3>GLOBAL GAME JAM WINNER</h3>
+            <p>A game that won first place in GGJ!</p>
+            <a href="javascript:void(0)" onclick="openGameModal('Global Game Jam Winner', 'A top-tier game!', 'https://yourgame.itch.io/gamejam')">Play Now</a>
         </div>
-    
-        <!-- Other Games in Pyramid Layout -->
-        <div class="game" onclick="showPopup('TankBattle', 'An arcade-style tank combat game with AI enemies and explosive action!')">
-            <img src="tankbattle.jpg" alt="Tank Battle">
+        <div class="game">
+            <img src="tank_battle.jpg" alt="Tank Battle">
             <h3>TANK BATTLE</h3>
+            <p>An arcade-style tank combat game.</p>
+            <a href="javascript:void(0)" onclick="openGameModal('Tank Battle', 'An arcade tank shooter!', 'https://yourgame.itch.io/game1')">Play Now</a>
         </div>
-
-        <div class="game" onclick="showPopup('KnifeThrowing', 'A fast-paced knife-throwing game where precision and timing are key!')">
-            <img src="knifethrowing.jpg" alt="Knife Throwing">
+        <div class="game">
+            <img src="knife_throwing.jpg" alt="Knife Throwing">
             <h3>KNIFE THROWING</h3>
+            <p>A fast-paced knife game.</p>
+            <a href="javascript:void(0)" onclick="openGameModal('Knife Throwing', 'A fun knife-throwing challenge!', 'https://yourgame.itch.io/game2')">Play Now</a>
         </div>
-    </div>
-
-    <!-- Popup for Game Details -->
-    <div class="popup" id="gamePopup">
-        <h3 id="popupTitle"></h3>
-        <p id="popupDescription"></p>
-        <a id="popupLink" href="#" target="_blank">Play Now</a>
-        <button class="popup-close" onclick="closePopup()">Close</button>
     </div>
     
-    <footer>
-        <p>Contact: <a href="mailto:Ambadygr5@gmail.com" style="color:#007BFF;">Ambadygr5@gmail.com</a></p>
-        <p><a href="https://www.linkedin.com/in/govardhan-r-426673218" target="_blank" style="color:#007BFF;">LinkedIn</a></p>
-    </footer>
-
+    <!-- Pop-up Modal -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGameModal()">&times;</span>
+            <h2 id="gameTitle"></h2>
+            <p id="gameDescription"></p>
+            <a id="gameLink" href="#" target="_blank" class="play-button">Play Now</a>
+        </div>
+    </div>
+    
     <script>
-        // Slideshow Functionality
         let slideIndex = 0;
         function showSlides() {
-            let slides = document.querySelectorAll(".slides");
-            slides.forEach(slide => slide.style.display = "none");
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
             slideIndex++;
-            if (slideIndex > slides.length) slideIndex = 1;
-            slides[slideIndex - 1].style.display = "block";
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";  
             setTimeout(showSlides, 3000);
         }
         showSlides();
-
-        // Popup Functionality
-        function showPopup(gameTitle, gameDescription) {
-            document.getElementById("popupTitle").innerText = gameTitle;
-            document.getElementById("popupDescription").innerText = gameDescription;
-            document.getElementById("popupLink").href = "https://yourgame.itch.io/" + gameTitle.toLowerCase().replace(/ /g, '');
-            document.getElementById("gamePopup").style.display = "block";
+        
+        function openGameModal(title, description, link) {
+            document.getElementById("gameTitle").innerText = title;
+            document.getElementById("gameDescription").innerText = description;
+            document.getElementById("gameLink").href = link;
+            document.getElementById("gameModal").style.display = "block";
         }
-        function closePopup() {
-            document.getElementById("gamePopup").style.display = "none";
+        
+        function closeGameModal() {
+            document.getElementById("gameModal").style.display = "none";
         }
     </script>
 </body>
