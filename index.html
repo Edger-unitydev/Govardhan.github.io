@@ -1,4 +1,3 @@
-You said:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,40 +11,94 @@ You said:
         h1 { font-size: 3rem; transition: 0.3s; }
         h1:hover { color: #007BFF; }
         p { font-size: 1.2rem; }
-        .games-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
-        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 300px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); transition: 0.3s; }
-        .game:hover { transform: scale(1.05); }
+        
+        /* Slideshow Styles */
+        .slideshow-container { max-width: 800px; position: relative; margin: auto; }
+        .slides { display: none; width: 100%; border-radius: 10px; }
+        
+        /* Pyramid Layout */
+        .games-container { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
+        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 300px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); transition: 0.3s; margin-bottom: 15px; }
+        .game:hover { transform: scale(1.05); cursor: pointer; }
         .game img { width: 100%; border-radius: 10px; }
         .game h3 { margin: 10px 0; }
         .game p { font-size: 1rem; }
-        .game a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
-        .game a:hover { background: #0056b3; }
-        footer { margin-top: 40px; font-size: 1rem; opacity: 0.8; }
+        
+        /* Popup Styles */
+        .popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1e293b; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(255,255,255,0.2); width: 350px; text-align: center; z-index: 10; }
+        .popup a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
+        .popup a:hover { background: #0056b3; }
+        .popup-close { background: red; color: white; border: none; padding: 5px 10px; margin-top: 10px; cursor: pointer; }
+        
     </style>
 </head>
 <body>
     <h1>GOVARDHAN R</h1>
-    <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Engineer</strong></p>
+    <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
     
+    <!-- Slideshow for Certificates -->
+    <div class="slideshow-container">
+        <img class="slides" src="certificate1.jpg" alt="Certificate 1">
+        <img class="slides" src="certificate2.jpg" alt="Certificate 2">
+        <img class="slides" src="certificate3.jpg" alt="Certificate 3">
+    </div>
+    
+    <!-- Featured Game -->
     <div class="games-container">
-        <div class="game">
-            <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
+        <div class="game" onclick="showPopup('GameJamWinner', 'An award-winning game developed during the Global Game Jam.')">
+            <img src="gamejam.jpg" alt="Game Jam Winner">
+            <h3>GAME JAM WINNER</h3>
+            <p>A top-tier game developed during the Global Game Jam.</p>
+        </div>
+    
+        <!-- Other Games in Pyramid Layout -->
+        <div class="game" onclick="showPopup('TankBattle', 'An arcade-style tank combat game with AI enemies and explosive action!')">
+            <img src="tankbattle.jpg" alt="Tank Battle">
             <h3>TANK BATTLE</h3>
-            <p>An arcade-style tank combat game with AI enemies and explosive action!</p>
-            <a href="https://yourgame.itch.io/game1" target="_blank">Play Now</a>
         </div>
 
-        <div class="game">
-            <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
+        <div class="game" onclick="showPopup('KnifeThrowing', 'A fast-paced knife-throwing game where precision and timing are key!')">
+            <img src="knifethrowing.jpg" alt="Knife Throwing">
             <h3>KNIFE THROWING</h3>
-            <p>A fast-paced knife-throwing game where precision and timing are key!</p>
-            <a href="https://yourgame.itch.io/game2" target="_blank">Play Now</a>
         </div>
+    </div>
+
+    <!-- Popup for Game Details -->
+    <div class="popup" id="gamePopup">
+        <h3 id="popupTitle"></h3>
+        <p id="popupDescription"></p>
+        <a id="popupLink" href="#" target="_blank">Play Now</a>
+        <button class="popup-close" onclick="closePopup()">Close</button>
     </div>
     
     <footer>
         <p>Contact: <a href="mailto:Ambadygr5@gmail.com" style="color:#007BFF;">Ambadygr5@gmail.com</a></p>
         <p><a href="https://www.linkedin.com/in/govardhan-r-426673218" target="_blank" style="color:#007BFF;">LinkedIn</a></p>
     </footer>
+
+    <script>
+        // Slideshow Functionality
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.querySelectorAll(".slides");
+            slides.forEach(slide => slide.style.display = "none");
+            slideIndex++;
+            if (slideIndex > slides.length) slideIndex = 1;
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000);
+        }
+        showSlides();
+
+        // Popup Functionality
+        function showPopup(gameTitle, gameDescription) {
+            document.getElementById("popupTitle").innerText = gameTitle;
+            document.getElementById("popupDescription").innerText = gameDescription;
+            document.getElementById("popupLink").href = "https://yourgame.itch.io/" + gameTitle.toLowerCase().replace(/ /g, '');
+            document.getElementById("gamePopup").style.display = "block";
+        }
+        function closePopup() {
+            document.getElementById("gamePopup").style.display = "none";
+        }
+    </script>
 </body>
 </html>
