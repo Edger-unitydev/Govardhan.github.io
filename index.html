@@ -12,9 +12,21 @@
         h1:hover { color: #007BFF; }
         p { font-size: 1.2rem; }
 
-        /* Slider (Certificates) */
-        .slider { width: 50%; max-width: 300px; margin: auto; overflow: hidden; position: relative; }
-        .slider img { width: 100%; max-height: 150px; border-radius: 10px; display: none; }
+        /* Certificate Slider */
+        .slider {
+            width: 50%; 
+            max-width: 640px; /* 16:9 aspect ratio */
+            margin: auto; 
+            overflow: hidden; 
+            position: relative;
+        }
+        .slider img {
+            width: 100%; 
+            height: auto;
+            max-height: 360px; /* Ensures 16:9 aspect ratio */
+            border-radius: 10px;
+            display: none;
+        }
         .slider img.active { display: block; }
 
         /* Games Layout */
@@ -35,7 +47,7 @@
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
     
-    <!-- Slideshow for Certificates -->
+    <!-- Slideshow for Certificates (16:9 Aspect Ratio) -->
     <div class="slider">
         <img src="https://github.com/Edger-unitydev/Govardhan.github.io/raw/main/GOVARDHAN%20R%20-1.jpg" class="active" alt="Certificate 1">
         <img src="https://your-other-certificate-link.jpg" alt="Certificate 2">
