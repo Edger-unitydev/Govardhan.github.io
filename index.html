@@ -11,9 +11,13 @@
         h1 { font-size: 3rem; transition: 0.3s; }
         h1:hover { color: #007BFF; }
         p { font-size: 1.2rem; }
-        .slider { width: 80%; max-width: 600px; margin: auto; overflow: hidden; position: relative; }
-        .slider img { width: 100%; max-height: 300px; border-radius: 10px; display: none; }
+
+        /* Slider (Certificates) */
+        .slider { width: 50%; max-width: 300px; margin: auto; overflow: hidden; position: relative; }
+        .slider img { width: 100%; max-height: 150px; border-radius: 10px; display: none; }
         .slider img.active { display: block; }
+
+        /* Games Layout */
         .games-container { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 30px; }
         .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 300px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); transition: 0.3s; }
         .game:hover { transform: scale(1.05); }
@@ -22,6 +26,8 @@
         .game p { font-size: 1rem; }
         .game a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
         .game a:hover { background: #0056b3; }
+
+        /* Footer */
         footer { margin-top: 40px; font-size: 1rem; opacity: 0.8; }
     </style>
 </head>
@@ -29,11 +35,13 @@
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
     
+    <!-- Slideshow for Certificates -->
     <div class="slider">
         <img src="https://github.com/Edger-unitydev/Govardhan.github.io/raw/main/GOVARDHAN%20R%20-1.jpg" class="active" alt="Certificate 1">
         <img src="https://your-other-certificate-link.jpg" alt="Certificate 2">
     </div>
     
+    <!-- Games Section -->
     <div class="games-container">
         <div class="game">
             <img src="https://your-game-thumbnail-link.jpg" alt="Game Jam Winner">
@@ -50,6 +58,7 @@
         </div>
     </div>
     
+    <!-- Footer -->
     <footer>
         <p>Contact: <a href="mailto:Ambadygr5@gmail.com" style="color:#007BFF;">Ambadygr5@gmail.com</a></p>
         <p><a href="https://www.linkedin.com/in/govardhan-r-426673218" target="_blank" style="color:#007BFF;">LinkedIn</a></p>
