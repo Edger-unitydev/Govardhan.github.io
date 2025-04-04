@@ -8,82 +8,58 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #0f172a; color: white; text-align: center; padding: 40px; }
-
         h1 { font-size: 3rem; transition: 0.3s; }
         h1:hover { color: #007BFF; }
         p { font-size: 1.2rem; }
 
-        /* About Me Section */
-        .about-me {
-            background: #1e293b; 
-            padding: 20px; 
-            border-radius: 10px; 
-            width: 60%; 
-            margin: 20px auto;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
-
-        /* Certificate Image */
-        .certificate-container {
+        /* Tabs Navigation */
+        .tabs {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
-        .certificate-container img {
-            width: 250px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #1e293b;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: 0.3s;
         }
+        .tab:hover, .tab.active { background: #007BFF; }
 
-        /* Games Section */
+        /* Sections */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* About Me */
+        .about-container {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+            text-align: left;
+        }
+        .about-container h2 { text-align: center; }
+        .about-container ul { margin-top: 10px; }
+
+        /* Games */
         .games-container { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-        .game { 
-            background: #1e293b; 
-            padding: 15px; 
-            border-radius: 10px; 
-            width: 350px; 
-            text-align: center; 
-            box-shadow: 0 0 10px rgba(255,255,255,0.1); 
-            transition: 0.3s; 
+        .game {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+            transition: 0.3s;
             cursor: pointer;
         }
         .game:hover { transform: scale(1.05); }
         .game img { width: 100%; border-radius: 10px; }
         .game h3 { margin: 10px 0; }
-        .game p { font-size: 1rem; }
-
-        /* Modal Popup */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: #1e293b;
-            padding: 20px;
-            width: 350px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-        .modal button {
-            padding: 10px;
-            border: none;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .play-btn { background: #007BFF; color: white; }
-        .play-btn:hover { background: #0056b3; }
-        .cancel-btn { background: red; color: white; }
-        .cancel-btn:hover { background: darkred; }
 
         footer { margin-top: 40px; font-size: 1rem; opacity: 0.8; }
     </style>
@@ -92,45 +68,51 @@
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
 
-    <!-- About Me Section -->
-    <div class="about-me">
-        <h2>About Me</h2>
-        <p>I'm a passionate Unity Developer with expertise in C# and Gameplay Programming. I enjoy creating fun and engaging games, including tank battles, arcade-style challenges, and strategy-based mechanics.</p>
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('about')">About Me</div>
+        <div class="tab" onclick="switchTab('games')">Games</div>
     </div>
 
-    <!-- Certificate Section -->
-    <div class="certificate-container">
-        <img src="https://raw.githubusercontent.com/Edger-unitydev/Govardhan.github.io/7daf9c27a5856da0ecd95ba522116f12b35504f0/GOVARDHANRRR.jpg" alt="Certificate">
+    <!-- About Me Section -->
+    <div id="about" class="section active">
+        <div class="about-container">
+            <h2>About Me</h2>
+            <p>Hello! I'm <strong>Govardhan R</strong>, a passionate Unity developer specializing in C# and gameplay programming.  
+                I have experience in creating immersive and fun gaming experiences with a focus on mechanics and AI.</p>
+            <ul>
+                <li>🏆 **Global Game Jam Winner - Kerala**</li>
+                <li>🎮 **3 Published Games (Windows Build)**</li>
+                <li>🚀 **Experienced in Unity's New Input System & AI Pathfinding**</li>
+                <li>🛠️ **Skills: C#, Unity Engine, AI Navigation, Gameplay Mechanics**</li>
+                <li>🎯 **Goal: Work at Riot Games!**</li>
+            </ul>
+            <h3>Contact Me</h3>
+            <p>Email: <a href="mailto:Ambadygr5@gmail.com" style="color:#007BFF;">Ambadygr5@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/govardhan-r-426673218" target="_blank" style="color:#007BFF;">My Profile</a></p>
+        </div>
     </div>
 
     <!-- Games Section -->
-    <div class="games-container">
-        <div class="game" onclick="showModal('Global Game Jam Winner', 'My award-winning game from the Global Game Jam.', 'https://yourgame.itch.io/gamejam')">
-            <img src="https://via.placeholder.com/400x200" alt="Game Jam Winner">
-            <h3>GLOBAL GAME JAM WINNER</h3>
-            <p>My award-winning game from the Global Game Jam. A unique experience awaits!</p>
-        </div>
+    <div id="games" class="section">
+        <div class="games-container">
+            <div class="game">
+                <img src="https://via.placeholder.com/400x200" alt="Game Jam Winner">
+                <h3>GLOBAL GAME JAM WINNER</h3>
+                <p>My award-winning game from the Global Game Jam. A unique experience awaits!</p>
+            </div>
 
-        <div class="game" onclick="showModal('Tank Battle', 'An arcade-style tank combat game with AI enemies and explosive action!', 'https://yourgame.itch.io/game1')">
-            <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
-            <h3>TANK BATTLE</h3>
-            <p>An arcade-style tank combat game with AI enemies and explosive action!</p>
-        </div>
+            <div class="game">
+                <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
+                <h3>TANK BATTLE</h3>
+                <p>An arcade-style tank combat game with AI enemies and explosive action!</p>
+            </div>
 
-        <div class="game" onclick="showModal('Knife Throwing', 'A fast-paced knife-throwing game where precision and timing are key!', 'https://yourgame.itch.io/game2')">
-            <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
-            <h3>KNIFE THROWING</h3>
-            <p>A fast-paced knife-throwing game where precision and timing are key!</p>
-        </div>
-    </div>
-
-    <!-- Modal Popup -->
-    <div class="modal" id="gameModal">
-        <div class="modal-content">
-            <h2 id="modalTitle">Game Title</h2>
-            <p id="modalDescription">Game description goes here.</p>
-            <button class="play-btn" id="playButton">Play Now</button>
-            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <div class="game">
+                <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
+                <h3>KNIFE THROWING</h3>
+                <p>A fast-paced knife-throwing game where precision and timing are key!</p>
+            </div>
         </div>
     </div>
 
@@ -140,15 +122,12 @@
     </footer>
 
     <script>
-        function showModal(title, description, link) {
-            document.getElementById("modalTitle").innerText = title;
-            document.getElementById("modalDescription").innerText = description;
-            document.getElementById("playButton").onclick = function() { window.open(link, '_blank'); };
-            document.getElementById("gameModal").style.display = "flex";
-        }
+        function switchTab(tab) {
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tabElement => tabElement.classList.remove('active'));
 
-        function closeModal() {
-            document.getElementById("gameModal").style.display = "none";
+            document.getElementById(tab).classList.add('active');
+            document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
         }
     </script>
 </body>
