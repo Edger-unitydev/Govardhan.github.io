@@ -8,45 +8,82 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #0f172a; color: white; text-align: center; padding: 40px; }
+
         h1 { font-size: 3rem; transition: 0.3s; }
         h1:hover { color: #007BFF; }
         p { font-size: 1.2rem; }
 
-        /* Certificate Image Centering */
-        .slider { 
-            width: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            overflow: hidden; 
-            position: relative; 
+        /* About Me Section */
+        .about-me {
+            background: #1e293b; 
+            padding: 20px; 
+            border-radius: 10px; 
+            width: 60%; 
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        /* Certificate Image */
+        .certificate-container {
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
         }
-
-        .slider img { 
-            width: 250px; /* Adjust size */
-            height: auto; 
-            display: none; 
-            border-radius: 10px; 
+        .certificate-container img {
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
-        .slider img.active { 
-            display: block; 
-        }
-
-        /* Game Section */
+        /* Games Section */
         .games-container { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-        .game { background: #1e293b; padding: 15px; border-radius: 10px; width: 350px; text-align: center; box-shadow: 0 0 10px rgba(255,255,255,0.1); transition: 0.3s; }
+        .game { 
+            background: #1e293b; 
+            padding: 15px; 
+            border-radius: 10px; 
+            width: 350px; 
+            text-align: center; 
+            box-shadow: 0 0 10px rgba(255,255,255,0.1); 
+            transition: 0.3s; 
+            cursor: pointer;
+        }
         .game:hover { transform: scale(1.05); }
         .game img { width: 100%; border-radius: 10px; }
         .game h3 { margin: 10px 0; }
         .game p { font-size: 1rem; }
-        .game a { display: block; background: #007BFF; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 5px; }
-        .game a:hover { background: #0056b3; }
 
-        /* Pyramid Positioning */
-        .top-game { width: 400px; }
-        .row { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #1e293b;
+            padding: 20px;
+            width: 350px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        .modal button {
+            padding: 10px;
+            border: none;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .play-btn { background: #007BFF; color: white; }
+        .play-btn:hover { background: #0056b3; }
+        .cancel-btn { background: red; color: white; }
+        .cancel-btn:hover { background: darkred; }
 
         footer { margin-top: 40px; font-size: 1rem; opacity: 0.8; }
     </style>
@@ -54,56 +91,65 @@
 <body>
     <h1>GOVARDHAN R</h1>
     <p><strong>Unity Developer</strong> │ <strong>C# Programmer</strong> │ <strong>Gameplay Programmer</strong></p>
-    
-    <!-- Certificate Section -->
-    <div class="slider">
-        <img src="https://github.com/Edger-unitydev/Govardhan.github.io/raw/3396acc4a63ee2f210785697f1759b339cff4aa2/GOVARDHAN%20GGJ.jpg" class="active" alt="Certificate 1">
-        <img src="https://github.com/Edger-unitydev/Govardhan.github.io/raw/5de512e34a382224b6e9c780ca226236cb1d728e/GOVA.jpeg" alt="Certificate 2">
 
-        
+    <!-- About Me Section -->
+    <div class="about-me">
+        <h2>About Me</h2>
+        <p>I'm a passionate Unity Developer with expertise in C# and Gameplay Programming. I enjoy creating fun and engaging games, including tank battles, arcade-style challenges, and strategy-based mechanics.</p>
     </div>
-    
-    <!-- Pyramid Layout for Games -->
+
+    <!-- Certificate Section -->
+    <div class="certificate-container">
+        <img src="https://raw.githubusercontent.com/Edger-unitydev/Govardhan.github.io/7daf9c27a5856da0ecd95ba522116f12b35504f0/GOVARDHANRRR.jpg" alt="Certificate">
+    </div>
+
+    <!-- Games Section -->
     <div class="games-container">
-        <!-- Top Game (Most Important) -->
-        <div class="game top-game">
+        <div class="game" onclick="showModal('Global Game Jam Winner', 'My award-winning game from the Global Game Jam.', 'https://yourgame.itch.io/gamejam')">
             <img src="https://via.placeholder.com/400x200" alt="Game Jam Winner">
             <h3>GLOBAL GAME JAM WINNER</h3>
             <p>My award-winning game from the Global Game Jam. A unique experience awaits!</p>
-            <a href="https://yourgame.itch.io/gamejam" target="_blank">Play Now</a>
         </div>
-        
-        <!-- Second Row of Games -->
-        <div class="row">
-            <div class="game">
-                <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
-                <h3>TANK BATTLE</h3>
-                <p>An arcade-style tank combat game with AI enemies and explosive action!</p>
-                <a href="https://yourgame.itch.io/game1" target="_blank">Play Now</a>
-            </div>
-            <div class="game">
-                <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
-                <h3>KNIFE THROWING</h3>
-                <p>A fast-paced knife-throwing game where precision and timing are key!</p>
-                <a href="https://yourgame.itch.io/game2" target="_blank">Play Now</a>
-            </div>
+
+        <div class="game" onclick="showModal('Tank Battle', 'An arcade-style tank combat game with AI enemies and explosive action!', 'https://yourgame.itch.io/game1')">
+            <img src="https://via.placeholder.com/300x150" alt="Tank Battle">
+            <h3>TANK BATTLE</h3>
+            <p>An arcade-style tank combat game with AI enemies and explosive action!</p>
+        </div>
+
+        <div class="game" onclick="showModal('Knife Throwing', 'A fast-paced knife-throwing game where precision and timing are key!', 'https://yourgame.itch.io/game2')">
+            <img src="https://via.placeholder.com/300x150" alt="Knife Throwing">
+            <h3>KNIFE THROWING</h3>
+            <p>A fast-paced knife-throwing game where precision and timing are key!</p>
         </div>
     </div>
-    
+
+    <!-- Modal Popup -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Game Title</h2>
+            <p id="modalDescription">Game description goes here.</p>
+            <button class="play-btn" id="playButton">Play Now</button>
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
     <footer>
         <p>Contact: <a href="mailto:Ambadygr5@gmail.com" style="color:#007BFF;">Ambadygr5@gmail.com</a></p>
         <p><a href="https://www.linkedin.com/in/govardhan-r-426673218" target="_blank" style="color:#007BFF;">LinkedIn</a></p>
     </footer>
-    
+
     <script>
-        let current = 0;
-        const images = document.querySelectorAll('.slider img');
-        function changeImage() {
-            images[current].classList.remove('active');
-            current = (current + 1) % images.length;
-            images[current].classList.add('active');
+        function showModal(title, description, link) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDescription").innerText = description;
+            document.getElementById("playButton").onclick = function() { window.open(link, '_blank'); };
+            document.getElementById("gameModal").style.display = "flex";
         }
-        setInterval(changeImage, 3000);
+
+        function closeModal() {
+            document.getElementById("gameModal").style.display = "none";
+        }
     </script>
 </body>
 </html>
